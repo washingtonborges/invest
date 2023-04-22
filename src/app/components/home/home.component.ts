@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { User } from '@models/user/user.model';
 import { AuthService } from '@services/auth.service';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,11 @@ import { AuthService } from '@services/auth.service';
 })
 export class HomeComponent {
 
-  constructor(private authService: AuthService) {}
+  public user: User | null;
+
+  constructor(private authService: AuthService, private userService: UserService) {
+    this.user = this.userService.getUserByToken();
+  }
 
   logout(): void {
     this.authService.logout();

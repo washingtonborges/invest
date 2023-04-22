@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginPayload } from '@models/login-payload.model';
+import { LoginPayload } from '@models/login/payload.model';
 import { AuthService } from '@services/auth.service';
 
 @Component({
@@ -38,8 +38,6 @@ export class LoginComponent implements OnInit {
     const payload: LoginPayload = this.loginForm.value;
     this.authService.login(payload).subscribe(
       response => {
-        const token = response.token;
-        localStorage.setItem('token', token);
         this.router.navigate(['/home']);
       },
       error => {

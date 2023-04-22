@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { LoginResponse } from '../models/login-response.model';
-import { LoginPayload } from '../models/login-payload.model';
+import { LoginResponse } from '@models/login/response.model';
+import { LoginPayload } from '@models/login/payload.model';
 import { Router } from '@angular/router';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +22,27 @@ export class AuthService {
         })
       );
   }
-
-  isLoggedIn(): boolean {
-    const token = localStorage.getItem('auth_token');
-    return !!token;
-  }
   
   logout(): void {
     localStorage.removeItem('auth_token');
     this.router.navigate(['/login']);
   }
+
+  isLoggedIn(): boolean {
+    return !!this.getTokenJwt();
+  }
+
+  getToken(): any {
+    return this.decodeToken();
+  }
+
+  private getTokenJwt(): string {
+    return localStorage.getItem('auth_token') ?? '';
+  }
+
+  private decodeToken(): any{
+    return jwt_decode(this.getTokenJwt());
+  }
   
 }
+
