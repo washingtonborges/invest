@@ -1,26 +1,36 @@
-<div class="container">
-    <h2>Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Seu email">
-        <div *ngIf="loginForm.controls['email'].errors && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
-          <div class="text-danger" *ngIf="loginForm.controls['email'].errors['required']">O email é obrigatório</div>
-          <div class="text-danger" *ngIf="loginForm.controls['email'].errors['email']">Email inválido</div>
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Sua senha">
-        <div *ngIf="loginForm.controls['password'].errors && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
-          <div class="text-danger" *ngIf="loginForm.controls['password'].errors['required']">A senha é obrigatória</div>
-        </div>
-      </div>
-  
-      <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
-  
-      <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Entrar</button>
-    </form>
-  </div>
+  <mat-grid-list cols="1" rowHeight="100%" class="mat-grid-list-centered">
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <p>
+              <mat-form-field>
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-icon matSuffix>mail</mat-icon>
+                <mat-error *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
+                  Email inválido
+                </mat-error>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field>
+                <input matInput placeholder="Senha" formControlName="password">
+                <mat-icon matSuffix>password</mat-icon>
+                <mat-error *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+                  Senha inválida
+                </mat-error>
+              </mat-form-field>
+            </p>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+            </mat-card-actions>
+            <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>    
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list> 
   
