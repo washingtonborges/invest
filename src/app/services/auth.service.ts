@@ -36,12 +36,14 @@ export class AuthService {
     return this.decodeToken();
   }
 
-  private getTokenJwt(): string {
-    return localStorage.getItem('auth_token') ?? '';
+  private getTokenJwt(): any {
+    return localStorage.getItem('auth_token') ?? null;
   }
 
   private decodeToken(): any{
-    return jwt_decode(this.getTokenJwt());
+    const token = this.getTokenJwt();
+    const result = token ? jwt_decode(this.getTokenJwt()) : null;
+    return result;
   }
   
 }
