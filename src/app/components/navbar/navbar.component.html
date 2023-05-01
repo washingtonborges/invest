@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
     <a mat-button routerLink="/"><mat-icon>query_stats</mat-icon> Invest</a>
     <span class="example-spacer"></span>
-    <a mat-button routerLink="/components">All Invest</a>
-    <a mat-button routerLink="/cdk">Product</a>
-    <button  (click)="logout()" mat-icon-button aria-label="Clique aqui para sair do sistema!">
+    <a *ngIf="isLoggedIn()" mat-button routerLink="new-stock">New Stock</a>
+    <a *ngIf="isLoggedIn()" mat-button routerLink="all-stock">All Stock</a>
+    <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button aria-label="Clique aqui para sair do sistema!">
         <mat-icon>power_settings_new</mat-icon>
     </button>
 </mat-toolbar>

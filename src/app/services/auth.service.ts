@@ -40,10 +40,8 @@ export class AuthService {
     return localStorage.getItem('auth_token') ?? null;
   }
 
-  private decodeToken(): any{
-    const token = this.getTokenJwt();
-    const result = token ? jwt_decode(this.getTokenJwt()) : null;
-    return result;
+  private decodeToken(): any {
+    return this.isLoggedIn() ? jwt_decode(this.getTokenJwt()) : null;
   }
   
 }

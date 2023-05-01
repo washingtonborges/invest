@@ -18,4 +18,8 @@ export class NavbarComponent {
   logout(): void {
     this.authService.logout();
   }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 }

@@ -20,14 +20,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from '@components/login/login.component';
 import { HomeComponent } from '@components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { StockCardComponent } from './components/stock-card/stock-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    StockCardComponent
   ],
   imports: [
     //Custom    
