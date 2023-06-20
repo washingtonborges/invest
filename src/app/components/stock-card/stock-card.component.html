@@ -1,1 +1,17 @@
-<p>stock-card works!</p>
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let stock of data$ | async">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ stock.symbol }}</mat-card-title>
+          <mat-card-subtitle>Quantity: {{ stock.quantity }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Date: {{ stock.date | date }}</p>
+          <p>Price: {{ stock.price | currency }}</p>
+          <p>Fee: {{ stock.fee | currency }}</p>
+          <p>Operation: {{ stock.operation ? 'Buy' : 'Sell' }}</p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+  

@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(payload: LoginPayload): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('http://localhost:3333/session/', payload)
+    return this.http.post<LoginResponse>(`${this.getBaseUrl()}/session/`, payload)
       .pipe(
         tap(response => {
           localStorage.setItem('auth_token', response.token);
@@ -29,19 +29,23 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getTokenJwt();
+    return !!this.getAuthToken();
   }
 
   getToken(): any {
     return this.decodeToken();
   }
 
-  private getTokenJwt(): any {
+  getAuthToken(): any {
     return localStorage.getItem('auth_token') ?? null;
   }
 
   private decodeToken(): any {
-    return this.isLoggedIn() ? jwt_decode(this.getTokenJwt()) : null;
+    return this.isLoggedIn() ? jwt_decode(this.getAuthToken()) : null;
+  }
+
+  getBaseUrl(): string{
+    return 'http://localhost:3333';
   }
   
 }
