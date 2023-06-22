@@ -21,6 +21,7 @@ import { LoginComponent } from '@components/login/login.component';
 import { HomeComponent } from '@components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StockCardComponent } from './components/stock-card/stock-card.component';
+import { StockListComponent } from './components/stock-list/stock-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { StockCardComponent } from './components/stock-card/stock-card.component
     HomeComponent,
     LoginComponent,
     NavbarComponent,
-    StockCardComponent
+    StockCardComponent,
+    StockListComponent
   ],
   imports: [
     //Custom    

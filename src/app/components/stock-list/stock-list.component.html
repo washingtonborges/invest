@@ -1,0 +1,5 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let stock of data$ | async">
+        <app-stock-card [stock]="stock"></app-stock-card>
+    </mat-grid-tile>
+</mat-grid-list>
