@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 //Custom 
 import { SharedModule } from './shared/shared.module';
@@ -22,6 +24,7 @@ import { HomeComponent } from '@components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StockCardComponent } from './components/stock-card/stock-card.component';
 import { StockListComponent } from './components/stock-list/stock-list.component';
+import { StockFormComponent } from './components/stock-form/stock-form.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { StockListComponent } from './components/stock-list/stock-list.component
     LoginComponent,
     NavbarComponent,
     StockCardComponent,
-    StockListComponent
+    StockListComponent,
+    StockFormComponent
   ],
   imports: [
     //Custom    
@@ -48,7 +52,9 @@ import { StockListComponent } from './components/stock-list/stock-list.component
     MatIconModule,
     MatCardModule,
     MatGridListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   exports: [SharedModule],
   providers: [],

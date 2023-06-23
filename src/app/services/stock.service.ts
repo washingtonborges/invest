@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Stock } from '@models/stock/stock.model';
 
 @Injectable({
@@ -14,5 +13,9 @@ export class StockService {
 
   getAll(): Observable<Stock[]>{
     return this.apiService.get(this.endpoint);
+  }
+
+  post(stock: Stock): Observable<Stock>{
+    return this.apiService.post(this.endpoint, stock);
   }
 }
