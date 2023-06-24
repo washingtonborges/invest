@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <a mat-button routerLink="/"><mat-icon>query_stats</mat-icon> Invest</a>
     <span class="example-spacer"></span>
-    <a *ngIf="isLoggedIn()" mat-button routerLink="new-stock">New Stock</a>
+    <a *ngIf="isLoggedIn()" mat-button (click)="openDialog('100ms', '100ms')">New Stock</a>
     <a *ngIf="isLoggedIn()" mat-button routerLink="all-stock">All Stock</a>
     <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button aria-label="Clique aqui para sair do sistema!">
         <mat-icon>power_settings_new</mat-icon>
