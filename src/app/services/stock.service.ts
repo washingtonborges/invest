@@ -18,4 +18,9 @@ export class StockService {
   post(stock: Stock): Observable<Stock>{
     return this.apiService.post(this.endpoint, stock);
   }
+
+  postImportFiles(files: any[]): Observable<Stock[]>{
+    const data = this.apiService.post(`${this.endpoint}/import/`, files, true);
+    return data;
+  }
 }

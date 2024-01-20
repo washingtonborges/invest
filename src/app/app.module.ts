@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
 //Material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +29,8 @@ import { StockCardComponent } from './components/stock-card/stock-card.component
 import { StockListComponent } from './components/stock-list/stock-list.component';
 import { StockFormComponent } from './components/stock-form/stock-form.component';
 import { StockDialogComponent } from './components/stock-dialog/stock-dialog.component';
+import { StockUploadComponent } from './components/stock-upload/stock-upload.component';
+import { StockDialogUploadComponent } from './components/stock-dialog-upload/stock-dialog-upload.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { StockDialogComponent } from './components/stock-dialog/stock-dialog.com
     StockCardComponent,
     StockListComponent,
     StockFormComponent,
-    StockDialogComponent
+    StockDialogComponent,
+    StockUploadComponent,
+    StockDialogUploadComponent
   ],
   imports: [
     //Custom    
@@ -48,6 +54,7 @@ import { StockDialogComponent } from './components/stock-dialog/stock-dialog.com
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     //Material
     MatFormFieldModule,
     MatInputModule,

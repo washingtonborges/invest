@@ -1,0 +1,4 @@
+<form (ngSubmit)="onSubmit()" #fileForm="ngForm" enctype="multipart/form-data">
+    <input type="file" name="pdfFiles" accept=".pdf" multiple (change)="onFileChange($event)" />
+    <button type="submit" [disabled]="!fileForm.form.valid">Importar</button>
+</form>  

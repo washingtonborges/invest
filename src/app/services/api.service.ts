@@ -19,8 +19,13 @@ export class ApiService {
     return this.http.get(`${this.authService.getBaseUrl()}/${endpoint}`, { headers });
   }
 
-  post(endpoint: string, body: any): Observable<any> {
+  post(endpoint: string, body: any, hasFormData: boolean = false): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+
+    if(hasFormData){
+      headers.set('Content-Type', 'multipart/form-data'); 
+    }
+    
     return this.http.post(`${this.authService.getBaseUrl()}/${endpoint}`, body, { headers });
   }
 }

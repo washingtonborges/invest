@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { StockDialogUploadComponent } from '@components/stock-dialog-upload/stock-dialog-upload.component';
 import { StockDialogComponent } from '@components/stock-dialog/stock-dialog.component';
 import { User } from '@models/user/user.model';
 import { AuthService } from '@services/auth.service';
@@ -25,6 +26,14 @@ export class NavbarComponent {
     });
   }
 
+  openDialogUpload(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(StockDialogUploadComponent, {
+      width: '70%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+  
   logout(): void {
     this.authService.logout();
   }

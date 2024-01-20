@@ -3,6 +3,7 @@
     <span class="example-spacer"></span>
     <a *ngIf="isLoggedIn()" mat-button (click)="openDialog('100ms', '100ms')">New Stock</a>
     <a *ngIf="isLoggedIn()" mat-button routerLink="all-stock">All Stock</a>
+    <a *ngIf="isLoggedIn()" mat-button (click)="openDialogUpload('100ms', '100ms')">Import Stock</a>
     <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button aria-label="Clique aqui para sair do sistema!">
         <mat-icon>power_settings_new</mat-icon>
     </button>
