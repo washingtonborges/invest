@@ -18,6 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 //Custom 
 import { SharedModule } from './shared/shared.module';
@@ -65,10 +66,11 @@ import { StockDialogUploadComponent } from './components/stock-dialog-upload/sto
     MatToolbarModule,
     MatOptionModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   exports: [SharedModule],
-  providers: [],
+  providers: [], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

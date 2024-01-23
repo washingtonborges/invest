@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { StockService } from '@services/stock.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-stock-upload',
   templateUrl: './stock-upload.component.html',
   styleUrls: ['./stock-upload.component.css']
 })
+
 export class StockUploadComponent {
 
   constructor(
     private dialogRef: MatDialogRef<StockUploadComponent>,
-    private stockService: StockService
+    private stockService: StockService,
+    private snackBar: MatSnackBar
     ) {}
 
   selectedFiles: FileList | undefined;
@@ -40,7 +43,22 @@ export class StockUploadComponent {
       });
       await Promise.all(filePromises as unknown as any[]);
       const result = await this.stockService.postImportFiles(allFiles).toPromise();
+      console.log('result', result);
       this.dialogRef.close();
+      if(result){
+        const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+        for (let index = 0; index < result.length; index++) {
+          const element: any = result[index];
+          console.log('element', element);
+          const customConfig: MatSnackBarConfig = {
+            duration: 1000 - (index * 10),
+            verticalPosition: 'top', 
+          };
+          const action = element.isSuccess ? 'Success' : 'Fail';
+          this.snackBar.open(`${element.invoice} - ${element.message}`, action, customConfig);
+          await delay(customConfig.duration || 0);
+        }
+      }
     } else {
       console.log('Nenhum arquivo selecionado');
     }
