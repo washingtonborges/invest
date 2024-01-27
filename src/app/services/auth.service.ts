@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { LoginResponse } from '@models/login/response.model';
 import { LoginPayload } from '@models/login/payload.model';
 import { Router } from '@angular/router';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   private decodeToken(): any {
-    return this.isLoggedIn() ? jwt_decode(this.getAuthToken()) : null;
+    return this.isLoggedIn() ? jwtDecode(this.getAuthToken()) : null;
   }
 
   getBaseUrl(): string{
