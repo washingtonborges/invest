@@ -12,7 +12,9 @@ import { jwtDecode } from 'jwt-decode';
 
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.validateTokenAndRedirect();
+  }
 
   login(payload: LoginPayload): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.getBaseUrl()}/session/`, payload)
@@ -46,6 +48,18 @@ export class AuthService {
 
   getBaseUrl(): string{
     return 'http://localhost:3333';
+  }
+
+  private isTokenValid(): boolean {
+    const token = this.getAuthToken();
+    const decodedToken = this.decodeToken();
+    return decodedToken && decodedToken.exp > Date.now() / 1000;
+  }
+
+  private validateTokenAndRedirect(): void {
+    if (!this.isTokenValid()) {
+      this.logout();
+    }
   }
   
 }
