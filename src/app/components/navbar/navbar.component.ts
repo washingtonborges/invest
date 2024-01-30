@@ -1,33 +1,88 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { StockDialogUploadComponent } from '@components/stock-dialog-upload/stock-dialog-upload.component';
 import { StockDialogComponent } from '@components/stock-dialog/stock-dialog.component';
 import { User } from '@models/user/user.model';
 import { AuthService } from '@services/auth.service';
 import { UserService } from '@services/user.service';
+import { StockService } from '@services/stock.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  providers: [MessageService]
 })
+
 export class NavbarComponent {
   public user: User | null;
+  public visible: boolean = false;
+  public uploadedFiles: any[] = [];
 
-  constructor(private authService: AuthService, private userService: UserService, public dialog: MatDialog) {
+  constructor(
+    private authService: AuthService, 
+    private userService: UserService, 
+    private stockService: StockService,
+    public dialog: MatDialog,
+    private messageService: MessageService
+  ) {
     this.user = this.userService.getUserByToken();
+  }
+
+  
+  async handleUpload(event: any) {
+    const files: FileList = event.files;
+    const batchSize = 1;
+    let allFiles: any[] = [];
+    const filePromises: Promise<any>[] = [];
+  
+    for (let i = 0; i < files.length; i += batchSize) {
+      const batch = Array.from(files).slice(i, i + batchSize);
+  
+      for (const file of batch) {
+        const fileContent = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            resolve(evt.target?.result);
+          };
+          reader.onerror = (err) => {
+            reject(err);
+          };
+          reader.readAsDataURL(file);
+        });
+  
+        allFiles.push(fileContent);
+      }
+      
+      const batchPromise = this.stockService.postImportFiles(allFiles).toPromise();
+      allFiles = [];
+      filePromises.push(batchPromise);
+      
+      try {
+        const result = await batchPromise;
+        
+        if (result) {
+          const messages: any[] = [];
+          for (let index = 0; index < result.length; index++) {
+            const element: any = result[index];
+            const action = element.isSuccess ? 'success' : 'error';
+            messages.push({ severity: action, summary: `Invoice ${element.invoice}`, detail: element.message });
+          }
+          this.messageService.addAll(messages);
+        }
+      } catch (error) {
+        console.error('Error uploading files:', error);
+      }
+    }
+    this.visible = false;
+  }
+  
+  showDialogUpload() {
+      this.visible = true;
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(StockDialogComponent, {
-      width: '70%',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-  }
-
-  openDialogUpload(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(StockDialogUploadComponent, {
       width: '70%',
       enterAnimationDuration,
       exitAnimationDuration,

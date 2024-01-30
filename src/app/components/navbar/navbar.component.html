@@ -3,8 +3,20 @@
     <span class="example-spacer"></span>
     <a *ngIf="isLoggedIn()" mat-button (click)="openDialog('100ms', '100ms')">New Stock</a>
     <a *ngIf="isLoggedIn()" mat-button routerLink="all-stock">All Stock</a>
-    <a *ngIf="isLoggedIn()" mat-button (click)="openDialogUpload('100ms', '100ms')">Import Stock</a>
+    <a *ngIf="isLoggedIn()" mat-button (click)="showDialogUpload()">Import Stock</a>
     <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button aria-label="Clique aqui para sair do sistema!">
         <mat-icon>power_settings_new</mat-icon>
     </button>
 </mat-toolbar>
+<p-dialog header="Header" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <div class="card flex justify-content-center">      
+    <p-fileUpload name="uploadInvoice[]" [customUpload]="true" (uploadHandler)="handleUpload($event)" [multiple]="true" accept=".pdf" [maxFileSize]=10000000>
+        <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+        </ng-template>
+    </p-fileUpload>
+    </div>
+</p-dialog>
+<p-toast></p-toast>

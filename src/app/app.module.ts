@@ -20,6 +20,11 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+//PrimeNG
+import { DialogModule } from 'primeng/dialog';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
+
 //Custom 
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
@@ -30,8 +35,6 @@ import { StockCardComponent } from './components/stock-card/stock-card.component
 import { StockListComponent } from './components/stock-list/stock-list.component';
 import { StockFormComponent } from './components/stock-form/stock-form.component';
 import { StockDialogComponent } from './components/stock-dialog/stock-dialog.component';
-import { StockUploadComponent } from './components/stock-upload/stock-upload.component';
-import { StockDialogUploadComponent } from './components/stock-dialog-upload/stock-dialog-upload.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +46,6 @@ import { StockDialogUploadComponent } from './components/stock-dialog-upload/sto
     StockListComponent,
     StockFormComponent,
     StockDialogComponent,
-    StockUploadComponent,
-    StockDialogUploadComponent
   ],
   imports: [
     //Custom    
@@ -56,6 +57,10 @@ import { StockDialogUploadComponent } from './components/stock-dialog-upload/sto
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    //PrimeNG
+    DialogModule,
+    ToastModule,
+    FileUploadModule,
     //Material
     MatFormFieldModule,
     MatInputModule,
