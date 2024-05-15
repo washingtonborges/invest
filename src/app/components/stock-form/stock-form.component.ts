@@ -11,8 +11,14 @@ import { StockService } from '@services/stock.service';
 
 export class StockFormComponent implements OnInit {
   stockForm!: FormGroup;
+  operations: any[];
 
-  constructor(private formBuilder: FormBuilder, private stockService: StockService) {}
+  constructor(private formBuilder: FormBuilder, private stockService: StockService) {
+    this.operations = [
+      { label: 'Buy', value: true },
+      { label: 'Sell', value: false }
+    ];
+  }
 
   ngOnInit(): void {
     this.initForm();

@@ -4,3 +4,10 @@
 .example-spacer {
     flex: 1 1 auto;
 }
+.p-toolbar-group-left a {
+    margin-right: 1rem;
+}
+
+.p-toolbar-group-right button {
+    margin-left: 0.5rem;
+}

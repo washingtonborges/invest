@@ -1,13 +1,16 @@
-<mat-toolbar color="primary">
-    <a mat-button routerLink="/"><mat-icon>query_stats</mat-icon> Invest</a>
-    <span class="example-spacer"></span>
-    <a *ngIf="isLoggedIn()" mat-button (click)="openDialog('100ms', '100ms')">New Stock</a>
-    <a *ngIf="isLoggedIn()" mat-button routerLink="all-stock">All Stock</a>
-    <a *ngIf="isLoggedIn()" mat-button (click)="showDialogUpload()">Import Stock</a>
-    <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button aria-label="Clique aqui para sair do sistema!">
-        <mat-icon>power_settings_new</mat-icon>
-    </button>
-</mat-toolbar>
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <a pButton pRipple routerLink="/" icon="pi pi-chart-line" label="Invest"></a>
+    </div>
+    <div class="p-toolbar-group-right">
+        <ng-container *ngIf="isLoggedIn()">
+            <button pButton pRipple label="New Stock" icon="pi pi-plus" (click)="openDialog('100ms', '100ms')"></button>
+            <button pButton pRipple label="All Stock" icon="pi pi-list" routerLink="all-stock"></button>
+            <button pButton pRipple label="Import Stock" icon="pi pi-upload" (click)="showDialogUpload()"></button>
+            <button pButton pRipple icon="pi pi-power-off" class="p-button-danger" (click)="logout()" aria-label="Clique aqui para sair do sistema!"></button>
+        </ng-container>
+    </div>
+</p-toolbar>
 <p-dialog header="Header" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
     <div class="card flex justify-content-center">      
     <p-fileUpload name="uploadInvoice[]" [customUpload]="true" (uploadHandler)="handleUpload($event)" [multiple]="true" accept=".pdf" [maxFileSize]=10000000>

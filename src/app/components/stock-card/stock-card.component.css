@@ -1,0 +1,16 @@
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
+  .subtitle {
+    font-size: 0.9em;
+    color: gray;
+  }
+  

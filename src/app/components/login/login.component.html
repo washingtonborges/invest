@@ -1,36 +1,28 @@
-<mat-grid-list cols="1" rowHeight="90%" class="mat-grid-list-centered">
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <p>
-            <mat-form-field>
-              <input type="emai" matInput placeholder="Email" formControlName="email">
-              <mat-icon matSuffix>mail</mat-icon>
-              <mat-error *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
-                Email inválido
-              </mat-error>
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field>
-              <input matInput type="password" placeholder="Senha" formControlName="password">
-              <mat-icon matSuffix>password</mat-icon>
-              <mat-error *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
-                Senha inválida
-              </mat-error>
-            </mat-form-field>
-          </p>
-          <mat-card-actions>
-            <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
-          </mat-card-actions>
-          <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>    
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list> 
+<div class="login-container">
+  <p-card header="Login">
+    <div class="p-fluid">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="p-field">
+          <label for="email">Email</label>
+          <input id="email" type="email" pInputText placeholder="Email" formControlName="email">
+          <i class="pi pi-envelope"></i>
+          <small *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="p-error">
+            Email inválido
+          </small>
+        </div>
+        <div class="p-field">
+          <label for="password">Senha</label>
+          <input id="password" type="password" pInputText placeholder="Senha" formControlName="password">
+          <i class="pi pi-lock"></i>
+          <small *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="p-error">
+            Senha inválida
+          </small>
+        </div>
+        <p-button label="Login" icon="pi pi-check" type="submit" [disabled]="loginForm.invalid"></p-button>
+        <div *ngIf="errorMsg" class="p-error">{{ errorMsg }}</div>
+      </form>
+    </div>
+  </p-card>
+</div>
+
   

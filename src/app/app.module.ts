@@ -7,26 +7,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
-//Material
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-
 //PrimeNG
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ToolbarModule } from 'primeng/toolbar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
 
 //Custom 
-import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from '@components/login/login.component';
 import { HomeComponent } from '@components/home/home.component';
@@ -48,8 +43,6 @@ import { StockDialogComponent } from './components/stock-dialog/stock-dialog.com
     StockDialogComponent,
   ],
   imports: [
-    //Custom    
-    SharedModule,
     //Angular
     BrowserModule,
     ReactiveFormsModule,
@@ -61,20 +54,16 @@ import { StockDialogComponent } from './components/stock-dialog/stock-dialog.com
     DialogModule,
     ToastModule,
     FileUploadModule,
-    //Material
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatGridListModule,
-    MatToolbarModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatDialogModule,
-    MatSnackBarModule
+    CardModule,
+    ButtonModule,
+    InputTextModule,
+    MessagesModule,
+    MessageModule,
+    ToolbarModule,
+    InputNumberModule,
+    CalendarModule,
+    DropdownModule,
   ],
-  exports: [SharedModule],
   providers: [], 
   bootstrap: [AppComponent]
 })

@@ -1,14 +1,17 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>{{ stock.symbol }}</mat-card-title>
-    <mat-card-subtitle>Quantity: {{ stock.quantity }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
+<p-card>
+  <ng-template pTemplate="header">
+    <div class="header-content">
+      <span class="title">{{ stock.symbol }}</span>
+      <span class="subtitle">Quantity: {{ stock.quantity }}</span>
+    </div>
+  </ng-template>
+  <div class="content">
     <p>Date: {{ stock.date | date }}</p>
     <p>Price: {{ stock.price | currency }}</p>
     <p>Fee: {{ stock.fee | currency }}</p>
     <p>Operation: {{ stock.operation ? 'Buy' : 'Sell' }}</p>
-  </mat-card-content>
-</mat-card>
+  </div>
+</p-card>
+
 
   

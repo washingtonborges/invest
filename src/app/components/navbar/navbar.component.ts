@@ -1,44 +1,43 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { StockDialogComponent } from '@components/stock-dialog/stock-dialog.component';
-import { User } from '@models/user/user.model';
+import { Component } from '@angular/core';
 import { AuthService } from '@services/auth.service';
 import { UserService } from '@services/user.service';
 import { StockService } from '@services/stock.service';
 import { MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { StockDialogComponent } from '@components/stock-dialog/stock-dialog.component';
+import { User } from '@models/user/user.model';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, DialogService]
 })
-
 export class NavbarComponent {
   public user: User | null;
   public visible: boolean = false;
   public uploadedFiles: any[] = [];
+  private ref: DynamicDialogRef | undefined;
 
   constructor(
-    private authService: AuthService, 
-    private userService: UserService, 
+    private authService: AuthService,
+    private userService: UserService,
     private stockService: StockService,
-    public dialog: MatDialog,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public dialogService: DialogService
   ) {
     this.user = this.userService.getUserByToken();
   }
 
-  
   async handleUpload(event: any) {
     const files: FileList = event.files;
     const batchSize = 1;
     let allFiles: any[] = [];
     const filePromises: Promise<any>[] = [];
-  
+
     for (let i = 0; i < files.length; i += batchSize) {
       const batch = Array.from(files).slice(i, i + batchSize);
-  
+
       for (const file of batch) {
         const fileContent = await new Promise((resolve, reject) => {
           const reader = new FileReader();
@@ -50,17 +49,17 @@ export class NavbarComponent {
           };
           reader.readAsDataURL(file);
         });
-  
+
         allFiles.push(fileContent);
       }
-      
+
       const batchPromise = this.stockService.postImportFiles(allFiles).toPromise();
       allFiles = [];
       filePromises.push(batchPromise);
-      
+
       try {
         const result = await batchPromise;
-        
+
         if (result) {
           const messages: any[] = [];
           for (let index = 0; index < result.length; index++) {
@@ -76,19 +75,26 @@ export class NavbarComponent {
     }
     this.visible = false;
   }
-  
+
   showDialogUpload() {
-      this.visible = true;
+    this.visible = true;
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(StockDialogComponent, {
+    this.ref = this.dialogService.open(StockDialogComponent, {
+      header: 'Stock Dialog',
       width: '70%',
-      enterAnimationDuration,
-      exitAnimationDuration,
+      contentStyle: { 'max-height': '500px', 'overflow': 'auto' },
+      baseZIndex: 10000
+    });
+
+    this.ref.onClose.subscribe((result: any) => {
+      if (result) {
+        // Handle result
+      }
     });
   }
-  
+
   logout(): void {
     this.authService.logout();
   }

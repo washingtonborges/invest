@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-stock-dialog',
@@ -7,5 +7,5 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./stock-dialog.component.css']
 })
 export class StockDialogComponent {
-  constructor(public dialogRef: MatDialogRef<StockDialogComponent>) {}
+  constructor(public dialogRef: DynamicDialogRef) {}
 }
