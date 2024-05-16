@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { AuthService } from '@services/auth.service';
 import { UserService } from '@services/user.service';
 import { StockService } from '@services/stock.service';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { StockDialogComponent } from '@components/stock-dialog/stock-dialog.component';
 import { User } from '@models/user/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -18,8 +19,10 @@ export class NavbarComponent {
   public visible: boolean = false;
   public uploadedFiles: any[] = [];
   private ref: DynamicDialogRef | undefined;
+  items: MenuItem[] | undefined;
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private userService: UserService,
     private stockService: StockService,
@@ -27,6 +30,46 @@ export class NavbarComponent {
     public dialogService: DialogService
   ) {
     this.user = this.userService.getUserByToken();
+    this.items = [
+      {
+        label: 'Home',
+        icon: 'pi pi-home',
+        command: () => {
+          this.router.navigate(['/']);
+        }
+      },
+      {
+        label: 'Stock',
+        icon: 'pi pi-wave-pulse',
+        visible: this.isLoggedIn(),
+        items: [
+          {
+            label: 'Create',
+            icon: 'pi pi-plus-circle',
+            visible: this.isLoggedIn(),
+            command: () => {
+              this.openDialog('100ms', '100ms');
+            }
+          },
+          {
+            label: 'Import',
+            icon: 'pi pi-upload',
+            visible: this.isLoggedIn(),
+            command: () => {
+              this.showDialogUpload();
+            }
+          }
+        ]
+      },
+      {
+        label: 'Logout',
+        icon: 'pi pi-power-off',
+        style: {'right': '0px', 'position':'absolute'},
+        command: () => {
+          this.logout();
+        }
+      }
+    ];
   }
 
   async handleUpload(event: any) {

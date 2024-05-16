@@ -20,6 +20,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.getBaseUrl()}/session/`, payload)
       .pipe(
         tap(response => {
+          this.validateTokenAndRedirect();
           localStorage.setItem('auth_token', response.token);
         })
       );
@@ -27,6 +28,10 @@ export class AuthService {
   
   logout(): void {
     localStorage.removeItem('auth_token');
+    if(this.isTokenValid() || this.isLoggedIn()){
+      console.error('Error logout');
+      return;
+    }
     this.router.navigate(['/login']);
   }
 

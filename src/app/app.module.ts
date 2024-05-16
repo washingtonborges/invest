@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
 //PrimeNG
+import { MenubarModule } from 'primeng/menubar';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
@@ -20,6 +21,9 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
+import { AvatarModule } from 'primeng/avatar';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 //Custom 
 import { AppComponent } from './app.component';
@@ -63,6 +67,10 @@ import { StockDialogComponent } from './components/stock-dialog/stock-dialog.com
     InputNumberModule,
     CalendarModule,
     DropdownModule,
+    AvatarModule,
+    IconFieldModule,
+    InputIconModule,
+    MenubarModule
   ],
   providers: [], 
   bootstrap: [AppComponent]

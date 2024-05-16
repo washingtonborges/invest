@@ -1,4 +1,12 @@
 @import '~node_modules/primeng/resources/themes/lara-dark-indigo/theme.css';
+@import "primeicons/primeicons.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+    font-size: 14px;
+}
+
+body {
+    margin-top: 60px;
+    font-family: var(--font-family);
+    font-weight: normal;
+}

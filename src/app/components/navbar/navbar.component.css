@@ -1,13 +1,10 @@
-.logo-app{
-    margin: 5px;
-}
-.example-spacer {
-    flex: 1 1 auto;
-}
-.p-toolbar-group-left a {
-    margin-right: 1rem;
+.menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
-.p-toolbar-group-right button {
-    margin-left: 0.5rem;
+:host ::ng-deep .p-menubar {
+    border-radius: 0 !important;
 }

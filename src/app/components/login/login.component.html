@@ -5,7 +5,6 @@
         <div class="p-field">
           <label for="email">Email</label>
           <input id="email" type="email" pInputText placeholder="Email" formControlName="email">
-          <i class="pi pi-envelope"></i>
           <small *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="p-error">
             Email inválido
           </small>
@@ -13,7 +12,6 @@
         <div class="p-field">
           <label for="password">Senha</label>
           <input id="password" type="password" pInputText placeholder="Senha" formControlName="password">
-          <i class="pi pi-lock"></i>
           <small *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="p-error">
             Senha inválida
           </small>
