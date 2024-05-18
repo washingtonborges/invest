@@ -89,12 +89,21 @@ export class IncomeTaxComponent implements OnInit {
     const payload = {
       ...formValues,
       unit: parseFloat(formValues.unit),
-      date: new Date(formValues.date),
+      date: formValues.date,
       symbol: this.editLatestQuote.symbol
     };
     this.stockService.updateLatestQuote(payload).subscribe(
       response => {
-        this.messageService.add({ severity: 'success', summary: `${ this.editLatestQuote.symbol }`, detail: "Latest quote updated!" });
+        this.messageService.add({ severity: 'success', summary: `${ this.editLatestQuote.symbol }`, detail: "Latest quote updated!" });  
+        this.position.map(item => {
+          if (item.symbol === payload.symbol) {
+            item.latest.date = payload.date;
+            item.latest.unit = payload.unit;
+            const total = payload.unit * item.quantity;
+            item.latest.total = Number(total.toFixed(2));
+          }
+          return item;
+        });
         this.dialogVisibleEditLatestQuote = false;
       },
       error => {
