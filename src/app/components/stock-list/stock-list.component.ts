@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Stock } from '@models/stock/stock.model';
+import { Position } from '@models/stock/position.model';
+import { Search } from '@models/stock/search.model';
 import { StockService } from '@services/stock.service';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-stock-list',
@@ -10,11 +10,15 @@ import { Observable, of } from 'rxjs';
 })
 export class StockListComponent implements OnInit {
 
-  data$: Observable<Stock[]> = of([]);
+  search: Search = { date: new Date(), isLatestQuote: false, isCurrentPosition: true}
+
+  position!: Position[];
 
   constructor(private stockService: StockService) {}
 
   async ngOnInit(): Promise<void> {
-    this.data$ = await this.stockService.getAll();
+    this.stockService.postPosition(this.search).subscribe((data) => {
+      this.position = data;
+    });
   }
 }

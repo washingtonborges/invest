@@ -1,6 +1,26 @@
-<div class="p-grid">
-    <div *ngFor="let stock of data$ | async" class="p-col-12 p-md-3">
-      <app-stock-card [stock]="stock"></app-stock-card>
-    </div>
-  </div>
-  
+<div class="card">
+  <p-table [value]="position" styleClass="p-datatable-striped">
+      <ng-template pTemplate="header">
+          <tr>
+              <th pSortableColumn="symbol" style="width:20%">
+                Symbol <p-sortIcon field="symbol" />
+              </th>
+              <th>Quantity</th>
+              <th>Avg Buy</th>
+              <th>Avg Buy Total</th>
+              <th>Fee Total</th>
+              <th>Start</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-position>
+          <tr>
+              <td>{{ position.symbol }}</td>
+              <td>{{ position.quantity }}</td>
+              <td>{{ position.history[position.history.length - 1].average.buy.unit }}</td>
+              <td>{{ position.history[position.history.length - 1].average.buy.total }}</td>
+              <td>{{ position.history[position.history.length - 1].fee.total }}</td>
+              <td>{{ position.history[position.history.length - 1].startDate | date:'dd/MM/yyyy' }}</td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>

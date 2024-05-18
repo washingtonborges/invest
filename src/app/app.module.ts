@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 //PrimeNG
 import { MenubarModule } from 'primeng/menubar';
@@ -24,6 +25,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AvatarModule } from 'primeng/avatar';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { TableModule } from 'primeng/table';
 
 //Custom 
 import { AppComponent } from './app.component';
@@ -34,6 +36,7 @@ import { StockCardComponent } from './components/stock-card/stock-card.component
 import { StockListComponent } from './components/stock-list/stock-list.component';
 import { StockFormComponent } from './components/stock-form/stock-form.component';
 import { StockDialogComponent } from './components/stock-dialog/stock-dialog.component';
+import { IncomeTaxComponent } from './components/income-tax/income-tax.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,7 @@ import { StockDialogComponent } from './components/stock-dialog/stock-dialog.com
     StockListComponent,
     StockFormComponent,
     StockDialogComponent,
+    IncomeTaxComponent,
   ],
   imports: [
     //Angular
@@ -70,9 +74,10 @@ import { StockDialogComponent } from './components/stock-dialog/stock-dialog.com
     AvatarModule,
     IconFieldModule,
     InputIconModule,
-    MenubarModule
+    MenubarModule,
+    TableModule
   ],
-  providers: [], 
+  providers: [DatePipe], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

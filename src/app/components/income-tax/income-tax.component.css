@@ -1,0 +1,8 @@
+.p-field {
+    margin-bottom: 1em;
+}
+
+.p-clickable {
+    cursor: pointer;
+    margin-left: 5px;
+}

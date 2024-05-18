@@ -40,7 +40,7 @@ export class NavbarComponent {
       },
       {
         label: 'Stock',
-        icon: 'pi pi-wave-pulse',
+        icon: 'pi pi-chart-line',
         visible: this.isLoggedIn(),
         items: [
           {
@@ -57,6 +57,22 @@ export class NavbarComponent {
             visible: this.isLoggedIn(),
             command: () => {
               this.showDialogUpload();
+            }
+          }
+        ]
+      },
+      {
+        label: 'Income Tax',
+        icon: 'pi pi-calculator',
+        visible: this.isLoggedIn(),
+        command: () => {
+          this.router.navigate(['/']);
+        },
+        items: [
+          {
+            label: '2023',
+            command: () => {
+              this.openIncomeTax(2023);
             }
           }
         ]
@@ -136,6 +152,10 @@ export class NavbarComponent {
         // Handle result
       }
     });
+  }
+
+  openIncomeTax(year: number): void{
+    this.router.navigate([`/incometax/${year}`]);
   }
 
   logout(): void {
