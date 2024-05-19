@@ -37,7 +37,16 @@ export class NavbarComponent {
   }
 
   async initializeMenu(): Promise<void> {
-    const years = await this.getYears();
+    const yearsBase = await this.getYears();
+    const minYear = Math.min(...yearsBase);
+
+    const currentYear = new Date().getFullYear();
+
+    const years = [];
+    for (let year = minYear; year < currentYear; year++) {
+      years.push(year);
+    }
+    
     const yearItems = years.map(year => ({
       label: year.toString(),
       command: () => {
