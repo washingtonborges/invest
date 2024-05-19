@@ -9,3 +9,9 @@
 :host ::ng-deep .p-menubar {
     border-radius: 0 !important;
 }
+
+.menu-logout {
+    cursor: pointer;
+    margin-right: 25px;
+}
+  

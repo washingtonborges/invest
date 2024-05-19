@@ -93,14 +93,6 @@ export class NavbarComponent {
           this.router.navigate(['/']);
         },
         items: yearItems
-      },
-      {
-        label: 'Logout',
-        icon: 'pi pi-power-off',
-        style: { 'right': '0px', 'position': 'absolute' },
-        command: () => {
-          this.logout();
-        }
       }
     ];
   }
