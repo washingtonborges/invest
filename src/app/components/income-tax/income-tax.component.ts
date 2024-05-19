@@ -41,19 +41,26 @@ export class IncomeTaxComponent implements OnInit {
   formGroup!: FormGroup;
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private stockService: StockService, 
     private fb: FormBuilder, 
     private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.year = params.get('year');
+      this.loadIncomeTaxData();
+    });
     this.formGroup = this.fb.group({
       symbol: [this.editLatestQuote.symbol, Validators.required],
       date: [this.editLatestQuote.date, Validators.required],
       unit: [this.editLatestQuote.unit, Validators.required]
     });
-    this.year = this.route.snapshot.paramMap.get('year');
+  }
+
+
+  loadIncomeTaxData(): void {
     this.search.date = new Date(`${this.year}-12-31`);
     this.stockService.postPosition(this.search).subscribe((data) => {
       this.position = data;
@@ -64,6 +71,7 @@ export class IncomeTaxComponent implements OnInit {
   showDialog() {
       this.dialogVisible = true;
   }
+
   getTotal(position: any): number {
     if (position.latest.total === 0) {
       return position.history[position.history.length - 1].average.buy.total;
@@ -82,7 +90,6 @@ export class IncomeTaxComponent implements OnInit {
     });
     this.dialogVisibleEditLatestQuote = true;
   }
-
   
   onSubmit() {
     const formValues = this.formGroup.value;

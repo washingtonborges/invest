@@ -30,6 +30,21 @@ export class NavbarComponent {
     public dialogService: DialogService
   ) {
     this.user = this.userService.getUserByToken();
+  }
+
+  ngOnInit(): void {
+    this.initializeMenu();
+  }
+
+  async initializeMenu(): Promise<void> {
+    const years = await this.getYears();
+    const yearItems = years.map(year => ({
+      label: year.toString(),
+      command: () => {
+        this.openIncomeTax(year);
+      }
+    }));
+
     this.items = [
       {
         label: 'Home',
@@ -68,19 +83,12 @@ export class NavbarComponent {
         command: () => {
           this.router.navigate(['/']);
         },
-        items: [
-          {
-            label: '2023',
-            command: () => {
-              this.openIncomeTax(2023);
-            }
-          }
-        ]
+        items: yearItems
       },
       {
         label: 'Logout',
         icon: 'pi pi-power-off',
-        style: {'right': '0px', 'position':'absolute'},
+        style: { 'right': '0px', 'position': 'absolute' },
         command: () => {
           this.logout();
         }
@@ -154,7 +162,7 @@ export class NavbarComponent {
     });
   }
 
-  openIncomeTax(year: number): void{
+  openIncomeTax(year: number): void {
     this.router.navigate([`/incometax/${year}`]);
   }
 
@@ -164,5 +172,10 @@ export class NavbarComponent {
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
+  }
+
+   async getYears(): Promise<number[]> {
+    const years = await this.stockService.getYears().toPromise();
+    return years ?? [];
   }
 }

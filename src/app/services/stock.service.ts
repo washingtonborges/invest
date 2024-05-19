@@ -34,4 +34,8 @@ export class StockService {
   updateLatestQuote(data: Search): Observable<Latest[]>{
     return this.apiService.post(`${this.endpoint}/updatelatestquote/`, data);
   }
+
+  getYears(): Observable<number[]>{
+    return this.apiService.get(`${this.endpoint}/getYears/`);
+  }
 }
