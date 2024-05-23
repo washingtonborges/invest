@@ -73,6 +73,10 @@
                 <th pSortableColumn="symbol">
                   Symbol <p-sortIcon field="symbol" />
                 </th>
+                <th pSortableColumn="name">
+                  Name <p-sortIcon field="name" />
+                </th>
+                <th>CNPJ</th>
                 <th>Quantity</th>
                 <th>Total</th>
             </tr>
@@ -80,6 +84,8 @@
         <ng-template pTemplate="body" let-position>
             <tr>
                 <td>{{ position.symbol }}</td>
+                <td>{{ position.name }}</td>
+                <td>{{ position.cnpj }}</td>
                 <td>{{ position.quantity }}</td>
                 <td>{{ getTotal(position) }}</td>
             </tr>
